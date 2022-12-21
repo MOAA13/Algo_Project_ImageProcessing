@@ -6,7 +6,6 @@ namespace ImageFilters
 {
     class SortHelper
     {
-
         public static byte Kth_element(Byte[] Array)
         {
             //TODO: Implement Kth smallest/largest element
@@ -32,9 +31,9 @@ namespace ImageFilters
                     max = Array[i];
                 }
             }
-//Test Passed
-//Console.Write(max);
-// Console.Write(size);
+            //Test Passed
+            //Console.Write(max);
+            // Console.Write(size);
 
             int[] countArr = new int[max + 1];
             //Initialising Count Array with 'Zeros'
@@ -49,22 +48,22 @@ namespace ImageFilters
                 countArr[Array[i]]++;
             }
 
-//Test Passed
-//for (int i = 0; i < countArr.Length; ++i)
-// Console.Write(countArr[i]);
+            //Test Passed
+            //for (int i = 0; i < countArr.Length; ++i)
+            // Console.Write(countArr[i]);
 
-            //Finding index of each value in 'countArr' in 'Array'
-            //and storing the value in 'sorted' 
-//Test Passed
-//Instead of i=0 --> i=1 &
-//i <max --> i <= max
+                        //Finding index of each value in 'countArr' in 'Array'
+                        //and storing the value in 'sorted' 
+            //Test Passed
+            //Instead of i=0 --> i=1 &
+            //i <max --> i <= max
             for (int i = 1; i <= max; ++i)
             {
                 countArr[i] += countArr[i - 1];
             }
-//Test Passed
-//Change i = size --> i = size-1 because then only we reach zero
-//Change i > 0 --> i >= 0 to include last record
+            //Test Passed
+            //Change i = size --> i = size-1 because then only we reach zero
+            //Change i > 0 --> i >= 0 to include last record
 
             for (int i = size - 1; i >= 0; i--)
             {
