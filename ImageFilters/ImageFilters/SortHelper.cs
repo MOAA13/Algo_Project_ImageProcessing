@@ -81,12 +81,38 @@ namespace ImageFilters
 
         }
 
-        public static byte[] QuickSort(Byte[] Array)
+        private static int partition(Byte[] Array, int start, int end)
+        {
+            byte pivot = Array[end];
+            int j = start;
+            for (int i = start; i < end; i++)
+            {
+                if (Array[i] < pivot)
+                {
+                    byte Temp = Array[i];
+                    Array[i] = Array[j];
+                    Array[j] = Temp;
+                    j++;
+                }
+            }
+            byte temp = Array[end];
+            Array[end] = Array[j];
+            Array[j] = temp;
+            return j;
+        }
+
+        public static Byte[] QuickSort(Byte[] Array, int start, int end)
         {
             // TODO: Implement the Quick Sort alogrithm on the input array
-
-            // Remove the next line
-            //throw new NotImplementedException();
+            if (start < end)
+            {
+                int pivotindex = partition(Array, start, end);
+                // Separately sort elements before
+                // partition and after partition
+                QuickSort(Array, start, pivotindex - 1);
+                QuickSort(Array, pivotindex + 1, end);
+            }
+            return Array;
         }
     }
 }
