@@ -26,9 +26,9 @@ namespace ZGraphTools
             myPane.Title.Text = GraphTitle;
             myPane.XAxis.Title.Text = XAxisTitle;
             myPane.YAxis.Title.Text = YAxisTitle;
-
+                     
         }
-
+      
         public void DrawGraph(Form DrawingForm)
         {
             _zedObject.Location = new Point(10, 10);
@@ -48,10 +48,10 @@ namespace ZGraphTools
             }
 
             Color Clr = Color.FromArgb(ClrRnd.Next(255), ClrRnd.Next(255), ClrRnd.Next(255));
-
+            
             // Generate a random-colored curve with circle symbols, and CurveName in the legend
-            LineItem myCurve = myPane.AddCurve(CurveName, list, Clr, SymbolType.Circle);
-
+            LineItem myCurve = myPane.AddCurve(CurveName, list, Clr,SymbolType.Circle);
+            
             // Fill the axis background with a color gradient
             myPane.Chart.Fill = new Fill(Color.White, Color.LightGoldenrodYellow, 45F);
 
