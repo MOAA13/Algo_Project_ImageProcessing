@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using ZGraphTools;
+using System.Drawing;
 
 namespace ImageFilters
 {
+    
     class AlphaTrimFilter
     {
-
+       static List<double> time_Count_Alpha = new List<double>();
+        static List<double> window_Count_Alpha = new List<double>();
+        static List<double> time_Kth_Alpha = new List<double>();
+        static List<double> window_Kth_Alpha = new List<double>();
         public static Byte[,] ApplyFilter(Byte[,] ImageMatrix, int MaxWindowSize, int UsedAlgorithm, int TrimValue)
         {
             var watch = Stopwatch.StartNew();
@@ -70,11 +76,21 @@ namespace ImageFilters
                         int average = sum / (windowSize * windowSize - 2 * TrimValue);
 
                         FilteredImageMatrix[y, x] = (Byte)average;
+
+
+                        watch.Stop();
+                        time_Count_Alpha.Add((double)watch.ElapsedMilliseconds);
+                        window_Count_Alpha.Add(windowSize);
                     }
                     else
                     {
                         // Use CountingSort to sort the window
                         FilteredImageMatrix[y, x] = SortHelper.Kth_element(window, TrimValue);
+
+
+                        watch.Stop();
+                        time_Kth_Alpha.Add( (double) watch.ElapsedMilliseconds);
+                        window_Kth_Alpha.Add( windowSize);
 
                     }
 
@@ -85,12 +101,19 @@ namespace ImageFilters
                 }
             }
 
-
-            watch.Stop();
             Console.WriteLine(
            $"The Execution time of the program is {watch.ElapsedMilliseconds}ms");
-        
+
+            ZGraphForm graph_Alpha = new ZGraphForm("WindowSizeVsTime", "WindowSize", "Time");
+            graph_Alpha.add_curve("Count", window_Count_Alpha.ToArray(), time_Count_Alpha.ToArray(), Color.Red);
+            graph_Alpha.add_curve("Kth", window_Kth_Alpha.ToArray(), time_Kth_Alpha.ToArray(), Color.Blue);
+            graph_Alpha.Show();
             return FilteredImageMatrix;
         }
+
+       
+         
     }
+
 }
+

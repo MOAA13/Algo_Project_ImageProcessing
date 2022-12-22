@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using ZGraphTools;
+using System.Drawing;
+
 namespace ImageFilters
 {
     class AdaptiveMedianFilter
     {
 
+        static List<double> time_Count = new List<double>();
+        static List<double> window_Count = new List<double>();
+        static List<double> time_quick = new List<double>();
+        static List<double> window_quick = new List<double>();
+
         public static Byte[,] ApplyFilter(Byte[,] ImageMatrix, int MaxWindowSize, int UsedAlgorithm)
         {
-            var watch = Stopwatch.StartNew();
+            var watch_adap = Stopwatch.StartNew();
             //TODO: Implement adaptive median filter
             // For each pixel in the image
             // 0) Start by window size 3×3
@@ -21,6 +29,7 @@ namespace ImageFilters
             int imageWidth = ImageMatrix.GetLength(1);
             for (int i = 0; i < imageHeight; i++)
             {
+
                 int windowSize = 3;
                 for (int j = 0; j < imageWidth; j++)
                 {
@@ -43,10 +52,12 @@ namespace ImageFilters
                     if (UsedAlgorithm == 0)
                     {
                         window = SortHelper.QuickSort(window, 0, windowIndex - 1);
+
                     }
                     else
                     {
                         window = SortHelper.CountingSort(window);
+
 
                     }
                     int value_min = window[0];
@@ -75,10 +86,24 @@ namespace ImageFilters
                     windowSize = 3;
                 }
             }
-            watch.Stop();
-            Console.WriteLine(
-           $"The Execution time of the program is {watch.ElapsedMilliseconds}ms");
+            watch_adap.Stop();
+            if(UsedAlgorithm == 0)
+            {
 
+
+                time_quick.Add((double)watch_adap.ElapsedMilliseconds);
+                window_quick.Add(MaxWindowSize);
+            }
+            else
+            {
+
+                time_Count.Add((double)watch_adap.ElapsedMilliseconds);
+                window_Count.Add(MaxWindowSize);
+            }
+            ZGraphForm graph = new ZGraphForm("WindowSizeVsTime", "WindowSize", "Time");
+            graph.add_curve("Quick", window_quick.ToArray(), time_quick.ToArray(), Color.Blue);
+            graph.add_curve("Count", window_Count.ToArray(), time_Count.ToArray(), Color.Red);
+            graph.Show();
             //Remove the next line
             //throw new NotImplementedException();
             return ImageMatrix;

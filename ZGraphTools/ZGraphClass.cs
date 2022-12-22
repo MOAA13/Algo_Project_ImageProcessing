@@ -61,5 +61,9 @@ namespace ZGraphTools
             // Calculate the Axis Scale Ranges
             _zedObject.AxisChange();
         }
+
+
     }
+
 }
+
