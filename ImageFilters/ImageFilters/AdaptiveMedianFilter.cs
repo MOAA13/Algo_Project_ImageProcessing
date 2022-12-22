@@ -19,7 +19,6 @@ namespace ImageFilters
 
             int imageHeight = ImageMatrix.GetLength(0);
             int imageWidth = ImageMatrix.GetLength(1);
-            Byte[,] FilteredImageMatrix = new Byte[imageHeight, imageWidth];
             for (int  i = 0; i < imageHeight; i++)
                 {
                 int windowSize = 3;
