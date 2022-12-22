@@ -59,16 +59,16 @@ namespace ImageFilters
                     if (UsedAlgorithm == 0)
                     {
                         // Use QuickSort to sort the window
-                        QuickSort(window);
+                        SortHelper.QuickSort(window , y - windowSize , y + windowSize);
                     }
                     else
                     {
                         // Use CountingSort to sort the window
-                        CountingSort(window);
+                        SortHelper.CountingSort(window);
                     }
 
                     // 3) Exclude the first T values (smallest) and the last T values (largest) from the array.
-                    Kth_element(window, TrimValue);
+                    SortHelper.Kth_element(window, TrimValue);
 
                     // 4) Calculate the average of the remaining values as the new pixel value 
                     int sum = 0;
