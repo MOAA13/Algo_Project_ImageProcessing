@@ -12,7 +12,7 @@ namespace ImageFilters
         /// <summary>
         /// Open an image, convert it to gray scale and load it into 2D array of size (Height x Width)
         /// </summary>
-        /// <param name="ImagePath">Image file path</param>
+        /// <param //name="ImagePath">Image file path</param>
         /// <returns>2D array of gray values</returns>
         public static byte[,] OpenImage(string ImagePath)
         {

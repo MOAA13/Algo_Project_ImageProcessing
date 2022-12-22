@@ -59,7 +59,7 @@ namespace ImageFilters
                     if (UsedAlgorithm == 0)
                     {
                         // Use QuickSort to sort the window
-                        SortHelper.QuickSort(window , y - windowSize , y + windowSize);
+                        SortHelper.QuickSort(window, y - windowSize, y + windowSize);
                     }
                     else
                     {
