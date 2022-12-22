@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using ZGraphTools;
+//using ZGraphTools;
 
 namespace ImageFilters
 {
@@ -50,10 +50,10 @@ namespace ImageFilters
             }
 
             //Create a graph and add two curves to it
-            ZGraphForm ZGF = new ZGraphForm("Sample Graph", "N", "f(N)");
+           /* ZGraphForm ZGF = new ZGraphForm("Sample Graph", "N", "f(N)");
             ZGF.add_curve("f(N) = N", x_values, y_values_N, Color.Red);
             ZGF.add_curve("f(N) = N Log(N)", x_values, y_values_NLogN, Color.Blue);
-            ZGF.Show();
+            ZGF.Show();*/
         }
 
         private void btnGen_Click(object sender, EventArgs e)

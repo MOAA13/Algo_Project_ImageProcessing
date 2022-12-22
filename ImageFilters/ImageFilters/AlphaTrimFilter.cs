@@ -23,10 +23,7 @@ namespace ImageFilters
 
             // Determine the window size to use based on the MaxWindowSize parameter
             int windowSize = MaxWindowSize;
-            if (MaxWindowSize > imageHeight || MaxWindowSize > imageWidth)
-            {
-                windowSize = Math.Min(imageHeight, imageWidth);
-            }
+            
 
             // Make sure the window size is odd
             if (windowSize % 2 == 0)
@@ -59,27 +56,30 @@ namespace ImageFilters
                     if (UsedAlgorithm == 0)
                     {
                         // Use QuickSort to sort the window
-                        SortHelper.QuickSort(window, y - windowSize, y + windowSize);
+
+                        window =  SortHelper.CountingSort(window);
+
+
+                        int sum = 0;
+                        for (int i = TrimValue; i < windowSize * windowSize - TrimValue; i++)
+                        {
+                            sum += window[i];
+                        }
+                        int average = sum / (windowSize * windowSize - 2 * TrimValue);
+
+                        FilteredImageMatrix[y, x] = (Byte)average;
                     }
-                    else
+                    else 
                     {
                         // Use CountingSort to sort the window
-                        SortHelper.CountingSort(window);
+                        FilteredImageMatrix[y, x]  =  SortHelper.Kth_element(window, TrimValue);
+                        
                     }
 
                     // 3) Exclude the first T values (smallest) and the last T values (largest) from the array.
-                    SortHelper.Kth_element(window, TrimValue);
-
                     // 4) Calculate the average of the remaining values as the new pixel value 
-                    int sum = 0;
-                    for (int i = TrimValue; i < windowSize * windowSize - TrimValue; i++)
-                    {
-                        sum += window[i];
-                    }
-                    int average = sum / (windowSize * windowSize - 2 * TrimValue);
 
                     // 5) Place the new value in the center of the window in the new matrix
-                    FilteredImageMatrix[y, x] = (Byte)average;
                 }
             }
 

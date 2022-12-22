@@ -6,44 +6,40 @@ namespace ImageFilters
 {
     class SortHelper
     {
-        public static byte Kth_element(Byte[] Array, int T)
+        public static byte Kth_element(byte[] Array, int T)
         {
             int k = T;
-            byte min = Array[0], max = Array[0];
+            byte min = 255, max = 0;
             //TODO: Implement Kth smallest/largest element
             // 1) Search the input array for the MIN and MAX elements without sorting
-            int a = Array.Length;
+            int arrayLength = Array.Length;
             List<byte> list = new List<byte>(Array);
-            while (k <= a - 1 && k != 0)
+
+            while (k < arrayLength && k != 0)
             {
-                
-                for (int i = 0; i <= a; i++)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    if (max < Array[i])
-                    {
-                        max = Array[i];
-                    }
-                    if (min > Array[i])
-                    {
-                        min = Array[i];
-                    }
+                    if (max < list[i])
+                        max = list[i];
+                    if (min > list[i])
+                        min = list[i];
                 }
+
                 list.Remove(min);
                 list.Remove(max);
-                Array = list.ToArray();
+
                 k--;
             }
-
-
-            // 2) Get the avarage of the numbers excluding the MIN and MAX elements
-            byte sum = 0, avg = 0;
-            for (int j = 0; j <= a; j++)
+            int sum = 0;
+            for(int i = 0; i < list.Count; i++)
             {
-                sum = (byte)(sum + Array[j]);
+                sum += list[i];
             }
-            avg = (byte)(sum / (byte)(a));
-            return (byte)(avg);
+            int avg = sum / list.Count;
+            return (byte)avg;
+            
         }
+
 
         public static byte[] CountingSort(byte[] Array)
         {
