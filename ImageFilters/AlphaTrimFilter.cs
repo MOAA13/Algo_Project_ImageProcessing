@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Diagnostics;
 
 namespace ImageFilters
 {
     class AlphaTrimFilter
     {
+
         public static Byte[,] ApplyFilter(Byte[,] ImageMatrix, int MaxWindowSize, int UsedAlgorithm, int TrimValue)
         {
+            var watch = Stopwatch.StartNew();
             //TODO: Implement alpha trim filter
             // For each pixel in the image:
             // 1) Store the values of the neighboring pixels in an array. The array is called the window, and it should be odd sized.
@@ -83,6 +85,11 @@ namespace ImageFilters
                 }
             }
 
+
+            watch.Stop();
+            Console.WriteLine(
+           $"The Execution time of the program is {watch.ElapsedMilliseconds}ms");
+        
             return FilteredImageMatrix;
         }
     }

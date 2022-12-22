@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Diagnostics;
 namespace ImageFilters
 {
     class AdaptiveMedianFilter
@@ -9,7 +9,7 @@ namespace ImageFilters
 
         public static Byte[,] ApplyFilter(Byte[,] ImageMatrix, int MaxWindowSize, int UsedAlgorithm)
         {
-
+            var watch = Stopwatch.StartNew();
             //TODO: Implement adaptive median filter
             // For each pixel in the image
             // 0) Start by window size 3×3
@@ -75,6 +75,9 @@ namespace ImageFilters
                     windowSize = 3;
                 }
             }
+            watch.Stop();
+            Console.WriteLine(
+           $"The Execution time of the program is {watch.ElapsedMilliseconds}ms");
 
             //Remove the next line
             //throw new NotImplementedException();
