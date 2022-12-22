@@ -19,16 +19,16 @@ namespace ImageFilters
                 for(int  i = 0; i < ImageMatrix.GetLength(0);i++)
             {
                 int win_size = 3;
-                for (int j =0; j < ImageMatrix.GetLength(1); j++)
+                for (int j =0; j < ImageMatrix.GetLength(1) ; j++)
                 {
                     
                     byte[] array = {0};
                     int temp_i = i;
                     int temp_j = j;
                     int index = 0;
-                    for (int x = 0; x < win_size; x++)
+                    for (int x = 0; x < win_size ; x++)
                     {
-                        for (int u = 0; u < win_size; u++)
+                        for (int u = 0; u < win_size ; u++)
                         {
                             array[index++] = ImageMatrix[temp_i, temp_j++];
                         }

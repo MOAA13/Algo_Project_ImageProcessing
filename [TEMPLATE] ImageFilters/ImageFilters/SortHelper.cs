@@ -9,13 +9,14 @@ namespace ImageFilters
         public static byte Kth_element(Byte[] Array, int T)
         {
             int k = T;
-            byte min = 255, max = 0;
+            byte min = Array[0], max = Array[0];
             //TODO: Implement Kth smallest/largest element
             // 1) Search the input array for the MIN and MAX elements without sorting
             int a = Array.Length;
+            List<byte> list = new List<byte>(Array);
             while (k <= a - 1 && k != 0)
             {
-                List<byte> list = new List<byte>(Array);
+                
                 for (int i = 0; i <= a; i++)
                 {
                     if (max < Array[i])
@@ -31,8 +32,8 @@ namespace ImageFilters
                 list.Remove(max);
                 Array = list.ToArray();
                 k--;
-                a -= 2;
             }
+
 
             // 2) Get the avarage of the numbers excluding the MIN and MAX elements
             byte sum = 0, avg = 0;
