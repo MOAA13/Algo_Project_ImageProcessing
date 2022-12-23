@@ -4,6 +4,10 @@ using System.Text;
 using System.Diagnostics;
 using ZGraphTools;
 using System.Drawing;
+using System.Net.NetworkInformation;
+using System.Reflection;
+using System.Security.Policy;
+using System.Windows.Forms;
 
 namespace ImageFilters
 {
@@ -47,6 +51,11 @@ namespace ImageFilters
                     // Store the values of the neighboring pixels in an array.
                     Byte[] window = new Byte[windowSize * windowSize];
                     int windowIndex = 0;
+                    /*
+                    The value y - windowSize / 2 is used as the starting value for the loop variable i because it determines the top row of the sliding window centered at the current pixel(x, y).
+                    If the window size is an odd number, the center of the window will be exactly at the middle row.For example, if windowSize is 3, the center of the window will be at the second row(index 1) and the top and bottom rows of the window will be at indices 0 and 2, respectively.
+                    If the window size is an even number, the center of the window will be between two rows. For example, if windowSize is 4, the center of the window will be between the second and third rows(indices 1 and 2), and the top and bottom rows of the window will be at indices 0 and 3, respectively.
+                    using y -windowSize / 2 as the starting value for the loop ensures that the center of the window is always at the current pixel(x, y).It works for both odd and even window sizes, as the division by 2 will result in a whole number that is either rounded down(for odd window sizes) or rounded to the nearest integer(for even window sizes).*/
                     for (int i = y - windowSize / 2; i <= y + windowSize / 2; i++)
                     {
                         for (int j = x - windowSize / 2; j <= x + windowSize / 2; j++)
