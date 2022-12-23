@@ -87,7 +87,10 @@ namespace ImageFilters
                 }
             }
             watch_adap.Stop();
-            if(UsedAlgorithm == 0)
+
+            Console.WriteLine(
+           $"The Execution time of the program is {watch_adap.ElapsedMilliseconds}ms");
+            if (UsedAlgorithm == 0)
             {
 
 

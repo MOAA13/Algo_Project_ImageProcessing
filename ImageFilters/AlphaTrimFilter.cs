@@ -79,6 +79,9 @@ namespace ImageFilters
 
 
                         watch.Stop();
+
+                        Console.WriteLine(
+                       $"The Execution time of the program is {watch.ElapsedMilliseconds}ms");
                         time_Count_Alpha.Add((double)watch.ElapsedMilliseconds);
                         window_Count_Alpha.Add(windowSize);
                     }
@@ -89,6 +92,9 @@ namespace ImageFilters
 
 
                         watch.Stop();
+
+                        Console.WriteLine(
+                       $"The Execution time of the program is {watch.ElapsedMilliseconds}ms");
                         time_Kth_Alpha.Add( (double) watch.ElapsedMilliseconds);
                         window_Kth_Alpha.Add( windowSize);
 
@@ -101,8 +107,6 @@ namespace ImageFilters
                 }
             }
 
-            Console.WriteLine(
-           $"The Execution time of the program is {watch.ElapsedMilliseconds}ms");
 
             ZGraphForm graph_Alpha = new ZGraphForm("WindowSizeVsTime", "WindowSize", "Time");
             graph_Alpha.add_curve("Count", window_Count_Alpha.ToArray(), time_Count_Alpha.ToArray(), Color.Red);
