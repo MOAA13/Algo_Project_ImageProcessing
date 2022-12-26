@@ -34,7 +34,7 @@ namespace ImageFilters
                 for (int j = 0; j < imageWidth; j++)
                 {
 
-
+                    //step1
                     Byte[] window = new Byte[windowSize * windowSize];
                     int windowIndex = 0;
                     for (int x = i - windowSize / 2; x <= i + windowSize / 2; x++)
@@ -88,22 +88,24 @@ namespace ImageFilters
             }
             watch_adap.Stop();
 
-            Console.WriteLine(
-           $"The Execution time of the program is {watch_adap.ElapsedMilliseconds}ms");
             if (UsedAlgorithm == 0)
             {
 
 
                 time_quick.Add((double)watch_adap.ElapsedMilliseconds);
                 window_quick.Add(MaxWindowSize);
+                Console.WriteLine(
+           $"The Execution time of the quick sort in adaptive is {watch_adap.ElapsedMilliseconds}ms");
             }
             else
             {
 
                 time_Count.Add((double)watch_adap.ElapsedMilliseconds);
                 window_Count.Add(MaxWindowSize);
+                Console.WriteLine(
+           $"The Execution time of the count sort in adaptive is {watch_adap.ElapsedMilliseconds}ms");
             }
-            ZGraphForm graph = new ZGraphForm("WindowSizeVsTime", "WindowSize", "Time");
+            ZGraphForm graph = new ZGraphForm("AdaptiveMedian", "WindowSize", "Time");
             graph.add_curve("Quick", window_quick.ToArray(), time_quick.ToArray(), Color.Blue);
             graph.add_curve("Count", window_Count.ToArray(), time_Count.ToArray(), Color.Red);
             graph.Show();
